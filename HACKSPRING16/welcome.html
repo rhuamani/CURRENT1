@@ -1,0 +1,133 @@
+<html>
+
+
+<head>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css" media="screen,projection">
+<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+<div id= "welcometext">
+<h1 style="color: orange" id="welcome"> Welcome</h2>
+<h2 id="weather"> Today it's </h2>
+</div>
+
+<div id="images">
+</div>
+
+<h3> Here's what you could wear </h3>
+
+<div class="carousel">
+  <a class="carousel-item"  id="one"></a>
+  <a class="carousel-item" id="two"></a>
+  <a class="carousel-item" id="three"></a>
+</div>
+</body>
+
+<script>
+  $.getJSON("http://api.worldweatheronline.com/premium/v1/weather.ashx?key=f6c53c11b4354ee0ab154358161604&q=91711&format=json&num_of_days=1", function( data ) {
+    $("#welcometext").hide().slideDown();
+
+    var temperature = document.getElementById("weather");
+    var temp = data.data.current_condition[0].temp_F;
+    var desc = String(data.data.current_condition[0].weatherDesc[0].value);
+    var rand = Math.floor(Math.random() * 3) + 1  ;
+
+
+    console.log(data.data.current_condition[0].weatherDesc[0].value);
+    colors = ['#4200ff', '#0648ff', '#0084ff', '#009dff', '#00b6ff',
+    '#00d6ff', '#00FF81', '#FFF254', '#FFAD00', '#FF7800',
+    '#ff6300', '#ff2d00', '#FF0300'];
+
+    temperature.innerHTML = "Today it's " + data.data.current_condition[0].temp_F + " degrees in Claremont." ;
+
+    //background color
+    if (temp < 0) {
+			$('body').css('background', colors[0]);
+		} else if (temp < 10) {
+			$('body').css('background', colors[1]);
+		} else if (temp < 20) {
+			$('body').css('background', colors[2]);
+		} else if (temp < 30) {
+			$('body').css('background', colors[3]);
+		} else if (temp < 40) {
+			$('body').css('background', colors[4]);
+		} else if (temp < 50) {
+			$('body').css('background', colors[5]);
+		} else if (temp < 60) {
+			$('body').css('background', colors[6]);
+		} else if (temp < 70) {
+      console.log("entered");
+			$('body').css('background', colors[7]);
+		} else if (temp < 80) {
+			$('body').css('background', colors[8]);
+		} else if (temp < 90) {
+			$('body').css('background', colors[9]);
+		} else if (temp < 100) {
+			$('body').css('background', colors[10]);
+		} else if (temp < 110) {
+			$('body').css('background', colors[11]);
+		} else if (temp >= 110) {
+			$('body').css('background', colors[12]);
+		}
+    //clouds
+    if (desc === "Sunny"){
+      $( "<img>" ).attr( "src","images/sunny.png").attr("width","100").appendTo( "#images" );
+    }else if (desc === "Partly Cloudy "){
+      $( "<img>" ).attr( "src","images/partlycloudy.png").attr("width","100").appendTo( "#images" );
+    }else if (desc === "Cloudy "){
+      $( "<img>" ).attr( "src","images/cloudy.png").attr("width","100").appendTo( "#images" );
+    }
+
+    if (rand == 1){
+      if (temp<50){
+        $( "<img>" ).attr( "src","shirts/hoodie.jpeg").appendTo( "#one" );
+        $( "<img>" ).attr( "src","pants/darkjean.jpeg").appendTo( "#two" );
+        $( "<img>" ).attr( "src","shoes/black.jpeg").appendTo( "#three" );
+
+      }else if (temp<70){
+
+      }else if (temp<100){
+
+      }
+      $( "<img>" ).attr( "src","shirts/marooncollar.jpeg").appendTo( "#one" );
+      $( "<img>" ).attr( "src","pants/darkjean.jpeg").appendTo( "#two" );
+      $( "<img>" ).attr( "src","shoes/black.jpeg").appendTo( "#three" );
+
+    }else if (rand==2){
+      if (temp<50){
+        $( "<img>" ).attr( "src","shirts/sweater.jpeg").appendTo( "#two" );
+        $( "<img>" ).attr( "src","pants/momjean.jpeg").appendTo( "#two" );
+        $( "<img>" ).attr( "src","shoes/white.jpeg").appendTo( "#three" );
+      }
+
+
+      $( "<img>" ).attr( "src","shirts/stripe.jpeg").appendTo( "#one" );
+      $( "<img>" ).attr( "src","pants/momjean.jpeg").appendTo( "#two" );
+      $( "<img>" ).attr( "src","shoes/white.jpeg").appendTo( "#three" );
+    }else if (rand==3){
+      if (temp<50){
+        $( "<img>" ).attr( "src","shirts/pinksweater.jpeg").appendTo( "#two" );
+        $( "<img>" ).attr( "src","pants/momjean.jpeg").appendTo( "#two" );
+        $( "<img>" ).attr( "src","shoes/white.jpeg").appendTo( "#three" );
+      }
+
+      $( "<img>" ).attr( "src","shirts/whiteshirt.jpeg").appendTo( "#one" );
+      $( "<img>" ).attr( "src","pants/jeans.jpeg").appendTo( "#two" );
+      $( "<img>" ).attr( "src","shoes/brown.jpeg").appendTo( "#three" );
+    }
+    $(document).ready(function(){
+      $('.carousel').carousel();
+    });
+
+  });
+</script>
+
+
+<html>
