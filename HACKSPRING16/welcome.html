@@ -1,4 +1,5 @@
 <html>
+<title>Welcome!</title>
 
 
 <head>
@@ -33,8 +34,12 @@
 <script>
 console.log("start");
 
-
-    var zipcode= window.location.search.substring(window.location.search.indexOf('?')+9);
+    //zip code gotten from sign_in.html
+    var zipIndex = window.location.search.indexOf('zipCode');
+    var zipcode= window.location.search.substring(zipIndex+8);
+    var name= window.location.search.substring(window.location.search.indexOf('fm=')+3, zipIndex-1);
+    document.title = "Welcome, "+name+"!";
+    document.getElementById("welcome").innerHTML = "Welcome, "+name+"!";
     var jsonURL = "http://api.openweathermap.org/data/2.5/weather?zip="+ zipcode+ "&units=imperial&mode=json&APPID=cf12551bc957867b30cc2c8cc464ce02";
 
   $.getJSON(jsonURL, function( data ) {
@@ -55,7 +60,7 @@ console.log("start");
     '#00d6ff', '#00FF81', '#FFF254', '#FFAD00', '#FF7800',
     '#ff6300', '#ff2d00', '#FF0300'];
 
-    temperature.innerHTML = "Today it's " + temp + " degrees in Claremont." ;
+    temperature.innerHTML = "Today it's " + temp + " in "+ data.name ;
 
     //background color
     if (temp < 0) {
