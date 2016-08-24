@@ -32,15 +32,12 @@
 
 <script>
 console.log("start");
-  var request = new XMLHttpRequest();
-  request.onreadystatechange = function() {
-    console.log("check");
-      if (request.readyState == 4 && request.status == 200) {
-        console.log("200");
-      }
-  };
 
-  $.getJSON("http://api.openweathermap.org/data/2.5/weather?zip=91711&units=imperial&mode=json&APPID=cf12551bc957867b30cc2c8cc464ce02", function( data ) {
+
+    var zipcode= window.location.search.substring(window.location.search.indexOf('?')+9);
+    var jsonURL = "http://api.openweathermap.org/data/2.5/weather?zip="+ zipcode+ "&units=imperial&mode=json&APPID=cf12551bc957867b30cc2c8cc464ce02";
+
+  $.getJSON(jsonURL, function( data ) {
     $("#welcometext").hide().slideDown();
     console.log("entering json");
     console.log(data);
