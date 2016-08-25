@@ -29,6 +29,7 @@
   <a class="carousel-item" id="two"></a>
   <a class="carousel-item" id="three"></a>
 </div>
+<button><a href="closet.html">Add more clothes to closet!</a></button>
 </body>
 
 <script>
@@ -49,13 +50,9 @@ console.log("start");
 
     var temperature = document.getElementById("weather");
     var temp = data.main.temp;
-    console.log(temp);
-
     var desc = String(data.weather[0].description);
     var rand = Math.floor(Math.random() * 3) + 1  ;
 
-
-    console.log(desc);
     colors = ['#4200ff', '#0648ff', '#0084ff', '#009dff', '#00b6ff',
     '#00d6ff', '#00FF81', '#FFF254', '#FFAD00', '#FF7800',
     '#ff6300', '#ff2d00', '#FF0300'];
